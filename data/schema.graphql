@@ -1,0 +1,2537 @@
+# Current access control list of the current object.
+type ACL {
+  # Access control list for users.
+  users: [UserACL!]
+  # Access control list for roles.
+  roles: [RoleACL!]
+  # Public access control list.
+  public: PublicACL
+}
+
+# Allow to manage access rights. If not provided object will be publicly readable and writable
+input ACLInput {
+  # Access control list for users.
+  users: [UserACLInput!]
+  # Access control list for roles.
+  roles: [RoleACLInput!]
+  # Public access control list.
+  public: PublicACLInput
+}
+
+# The Animal object type is used in operations that involve outputting objects of Animal class.
+type Animal implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+}
+
+# A connection to a list of items.
+type AnimalConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [AnimalEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type AnimalEdge {
+  # The item at the end of the edge
+  node: Animal
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The AnimalOrder input type is used when sorting objects of the Animal class.
+enum AnimalOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Animal class.
+input AnimalPointerInput {
+  # Link an existing object from Animal class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Animal class.
+  createAndLink: CreateAnimalFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Animal class into a relation field.
+input AnimalRelationInput {
+  # Add existing objects from the Animal class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Animal class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Animal class into the relation.
+  createAndAdd: [CreateAnimalFieldsInput!]
+}
+
+# The AnimalRelationWhereInput input type is used in operations that involve filtering objects of Animal class.
+input AnimalRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: AnimalWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: AnimalWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The AnimalWhereInput input type is used in operations that involve filtering objects of Animal class.
+input AnimalWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [AnimalWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [AnimalWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [AnimalWhereInput!]
+}
+
+# The Any scalar type is used in operations and types that involve any type of value.
+scalar Any
+
+# Use Inline Fragment on Array to get results: https://graphql.org/learn/queries/#inline-fragments
+union ArrayResult =
+    Element
+  | Role
+  | User
+  | Animal
+  | B4aVehicle
+  | Countries
+  | Feedback
+  | Hero
+  | Person
+# The ArrayWhereInput input type is used in operations that involve filtering objects by a field of type Array.
+input ArrayWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: Any
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: Any
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: Any
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: Any
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: Any
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: Any
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [Any]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [Any]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the containedBy operator to specify a constraint to select the objects
+  # where the values of an array field is contained by another specified array.
+  containedBy: [Any]
+  # This is the contains operator to specify a constraint to select the objects
+  # where the values of an array field contain all elements of another specified array.
+  contains: [Any]
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The B4aVehicle object type is used in operations that involve outputting objects of B4aVehicle class.
+type B4aVehicle implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object price.
+  price: Float
+  # This is the object color.
+  color: String
+}
+
+# A connection to a list of items.
+type B4aVehicleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [B4aVehicleEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type B4aVehicleEdge {
+  # The item at the end of the edge
+  node: B4aVehicle
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The B4aVehicleOrder input type is used when sorting objects of the B4aVehicle class.
+enum B4aVehicleOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  color_ASC
+  color_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the B4aVehicle class.
+input B4aVehiclePointerInput {
+  # Link an existing object from B4aVehicle class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from B4aVehicle class.
+  createAndLink: CreateB4aVehicleFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the B4aVehicle class into a relation field.
+input B4aVehicleRelationInput {
+  # Add existing objects from the B4aVehicle class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the B4aVehicle class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the B4aVehicle class into the relation.
+  createAndAdd: [CreateB4aVehicleFieldsInput!]
+}
+
+# The B4aVehicleRelationWhereInput input type is used in operations that involve filtering objects of B4aVehicle class.
+input B4aVehicleRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: B4aVehicleWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: B4aVehicleWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The B4aVehicleWhereInput input type is used in operations that involve filtering objects of B4aVehicle class.
+input B4aVehicleWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object price.
+  price: NumberWhereInput
+  # This is the object color.
+  color: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [B4aVehicleWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [B4aVehicleWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [B4aVehicleWhereInput!]
+}
+
+# The BooleanWhereInput input type is used in operations that involve filtering objects by a field of type Boolean.
+input BooleanWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: Boolean
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: Boolean
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The BoxInput type is used to specifiy a box operation on a within geo query.
+input BoxInput {
+  # This is the bottom left coordinates of the box.
+  bottomLeft: GeoPointInput!
+  # This is the upper right coordinates of the box.
+  upperRight: GeoPointInput!
+}
+
+# The Bytes scalar type is used in operations and types that involve base 64 binary data.
+scalar Bytes
+
+# The BytesWhereInput input type is used in operations that involve filtering objects by a field of type Bytes.
+input BytesWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: Bytes
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: Bytes
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: Bytes
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: Bytes
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: Bytes
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: Bytes
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [Bytes]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [Bytes]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The CenterSphereInput type is used to specifiy a centerSphere operation on a geoWithin query.
+input CenterSphereInput {
+  # This is the center of the sphere.
+  center: GeoPointInput!
+  # This is the radius of the sphere.
+  distance: Float!
+}
+
+# The Class type is used to return the information about an object class.
+type Class {
+  # This is the name of the object class.
+  name: String!
+  # These are the schema's fields of the object class.
+  schemaFields: [SchemaField!]!
+}
+
+# The Countries object type is used in operations that involve outputting objects of Countries class.
+type Countries implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object Name.
+  Name: String
+}
+
+# A connection to a list of items.
+type CountriesConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [CountriesEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type CountriesEdge {
+  # The item at the end of the edge
+  node: Countries
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The CountriesOrder input type is used when sorting objects of the Countries class.
+enum CountriesOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  Name_ASC
+  Name_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Countries class.
+input CountriesPointerInput {
+  # Link an existing object from Countries class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Countries class.
+  createAndLink: CreateCountriesFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Countries class into a relation field.
+input CountriesRelationInput {
+  # Add existing objects from the Countries class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Countries class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Countries class into the relation.
+  createAndAdd: [CreateCountriesFieldsInput!]
+}
+
+# The CountriesRelationWhereInput input type is used in operations that involve filtering objects of Countries class.
+input CountriesRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: CountriesWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: CountriesWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The CountriesWhereInput input type is used in operations that involve filtering objects of Countries class.
+input CountriesWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object Name.
+  Name: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [CountriesWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [CountriesWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [CountriesWhereInput!]
+}
+
+# The CreateAnimalFieldsInput input type is used in operations that involve creation of objects in the Animal class.
+input CreateAnimalFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+}
+
+input CreateAnimalInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateAnimalFieldsInput
+  clientMutationId: String
+}
+
+type CreateAnimalPayload {
+  # This is the created object.
+  animal: Animal!
+  clientMutationId: String
+}
+
+# The CreateB4aVehicleFieldsInput input type is used in operations that involve creation of objects in the B4aVehicle class.
+input CreateB4aVehicleFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object price.
+  price: Float
+  # This is the object color.
+  color: String
+}
+
+input CreateB4aVehicleInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateB4aVehicleFieldsInput
+  clientMutationId: String
+}
+
+type CreateB4aVehiclePayload {
+  # This is the created object.
+  b4aVehicle: B4aVehicle!
+  clientMutationId: String
+}
+
+input CreateClassInput {
+  # This is the name of the object class.
+  name: String!
+  # These are the schema's fields of the object class.
+  schemaFields: SchemaFieldsInput
+  clientMutationId: String
+}
+
+type CreateClassPayload {
+  # This is the created class.
+  class: Class!
+  clientMutationId: String
+}
+
+# The CreateCountriesFieldsInput input type is used in operations that involve creation of objects in the Countries class.
+input CreateCountriesFieldsInput {
+  ACL: ACLInput
+  # This is the object Name.
+  Name: String
+}
+
+input CreateCountriesInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateCountriesFieldsInput
+  clientMutationId: String
+}
+
+type CreateCountriesPayload {
+  # This is the created object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+# The CreateFeedbackFieldsInput input type is used in operations that involve creation of objects in the Feedback class.
+input CreateFeedbackFieldsInput {
+  ACL: ACLInput
+  # This is the object author.
+  author: String
+}
+
+input CreateFeedbackInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateFeedbackFieldsInput
+  clientMutationId: String
+}
+
+type CreateFeedbackPayload {
+  # This is the created object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
+input CreateFileInput {
+  # This is the new file to be created and uploaded.
+  upload: Upload!
+  clientMutationId: String
+}
+
+type CreateFilePayload {
+  # This is the created file info.
+  fileInfo: FileInfo!
+  clientMutationId: String
+}
+
+# The CreateHeroFieldsInput input type is used in operations that involve creation of objects in the Hero class.
+input CreateHeroFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+input CreateHeroInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateHeroFieldsInput
+  clientMutationId: String
+}
+
+type CreateHeroPayload {
+  # This is the created object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+# The CreatePersonFieldsInput input type is used in operations that involve creation of objects in the Person class.
+input CreatePersonFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+input CreatePersonInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreatePersonFieldsInput
+  clientMutationId: String
+}
+
+type CreatePersonPayload {
+  # This is the created object.
+  person: Person!
+  clientMutationId: String
+}
+
+# The CreateRoleFieldsInput input type is used in operations that involve creation of objects in the Role class.
+input CreateRoleFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object users.
+  users: UserRelationInput
+  # This is the object roles.
+  roles: RoleRelationInput
+}
+
+input CreateRoleInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateRoleFieldsInput
+  clientMutationId: String
+}
+
+type CreateRolePayload {
+  # This is the created object.
+  role: Role!
+  clientMutationId: String
+}
+
+# The CreateUserFieldsInput input type is used in operations that involve creation of objects in the User class.
+input CreateUserFieldsInput {
+  ACL: ACLInput
+  # This is the object username.
+  username: String!
+  # This is the object password.
+  password: String!
+  # This is the object email.
+  email: String
+  # This is the object emailVerified.
+  emailVerified: Boolean
+  # This is the object authData.
+  authData: Object
+}
+
+input CreateUserInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateUserFieldsInput
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  # This is the created object.
+  user: User!
+  clientMutationId: String
+}
+
+# The Date scalar type is used in operations and types that involve dates.
+scalar Date
+
+# The DateWhereInput input type is used in operations that involve filtering objects by a field of type Date.
+input DateWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: Date
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: Date
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: Date
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: Date
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: Date
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: Date
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [Date]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [Date]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+input DeleteAnimalInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteAnimalPayload {
+  # This is the deleted object.
+  animal: Animal!
+  clientMutationId: String
+}
+
+input DeleteB4aVehicleInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteB4aVehiclePayload {
+  # This is the deleted object.
+  b4aVehicle: B4aVehicle!
+  clientMutationId: String
+}
+
+input DeleteClassInput {
+  # This is the name of the object class.
+  name: String!
+  clientMutationId: String
+}
+
+type DeleteClassPayload {
+  # This is the deleted class.
+  class: Class!
+  clientMutationId: String
+}
+
+input DeleteCountriesInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCountriesPayload {
+  # This is the deleted object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+input DeleteFeedbackInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteFeedbackPayload {
+  # This is the deleted object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
+input DeleteHeroInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteHeroPayload {
+  # This is the deleted object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+input DeletePersonInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeletePersonPayload {
+  # This is the deleted object.
+  person: Person!
+  clientMutationId: String
+}
+
+input DeleteRoleInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteRolePayload {
+  # This is the deleted object.
+  role: Role!
+  clientMutationId: String
+}
+
+input DeleteUserInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteUserPayload {
+  # This is the deleted object.
+  user: User!
+  clientMutationId: String
+}
+
+# The Element object type is used to return array items' value.
+type Element {
+  # Return the value of the element in the array
+  value: Any!
+}
+
+# The Feedback object type is used in operations that involve outputting objects of Feedback class.
+type Feedback implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object author.
+  author: String
+}
+
+# A connection to a list of items.
+type FeedbackConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [FeedbackEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type FeedbackEdge {
+  # The item at the end of the edge
+  node: Feedback
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The FeedbackOrder input type is used when sorting objects of the Feedback class.
+enum FeedbackOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  author_ASC
+  author_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Feedback class.
+input FeedbackPointerInput {
+  # Link an existing object from Feedback class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Feedback class.
+  createAndLink: CreateFeedbackFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Feedback class into a relation field.
+input FeedbackRelationInput {
+  # Add existing objects from the Feedback class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Feedback class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Feedback class into the relation.
+  createAndAdd: [CreateFeedbackFieldsInput!]
+}
+
+# The FeedbackRelationWhereInput input type is used in operations that involve filtering objects of Feedback class.
+input FeedbackRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: FeedbackWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: FeedbackWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The FeedbackWhereInput input type is used in operations that involve filtering objects of Feedback class.
+input FeedbackWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object author.
+  author: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [FeedbackWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [FeedbackWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [FeedbackWhereInput!]
+}
+
+# The File scalar type is used in operations and types that involve files.
+scalar File
+
+# The FileInfo object type is used to return the information about files.
+type FileInfo {
+  # This is the file name.
+  name: String!
+  # This is the url in which the file can be downloaded.
+  url: String!
+}
+
+# The FileWhereInput input type is used in operations that involve filtering objects by a field of type File.
+input FileWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: File
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: File
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: File
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: File
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: File
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: File
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [File]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [File]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the matchesRegex operator to specify a constraint to select the
+  # objects where the value of a field matches a specified regular expression.
+  matchesRegex: String
+  # This is the options operator to specify optional flags (such as "i" and "m")
+  # to be added to a matchesRegex operation in the same set of constraints.
+  options: String
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The GeoIntersectsInput type is used to specify a geoIntersects operation on a constraint.
+input GeoIntersectsInput {
+  # This is the point to be specified.
+  point: GeoPointInput
+}
+
+# The GeoPoint object type is used to return the information about geo point fields.
+type GeoPoint {
+  # This is the latitude.
+  latitude: Float!
+  # This is the longitude.
+  longitude: Float!
+}
+
+# The GeoPointInput type is used in operations that involve inputting fields of type geo point.
+input GeoPointInput {
+  # This is the latitude.
+  latitude: Float!
+  # This is the longitude.
+  longitude: Float!
+}
+
+# The GeoPointWhereInput input type is used in operations that involve filtering objects by a field of type GeoPoint.
+input GeoPointWhereInput {
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the nearSphere operator to specify a constraint to select the objects
+  # where the values of a geo point field is near to another geo point.
+  nearSphere: GeoPointInput
+  # This is the maxDistance operator to specify a constraint to select the objects
+  # where the values of a geo point field is at a max distance (in radians) from
+  # the geo point specified in the $nearSphere operator.
+  maxDistance: Float
+  # This is the maxDistanceInRadians operator to specify a constraint to select
+  # the objects where the values of a geo point field is at a max distance (in
+  # radians) from the geo point specified in the $nearSphere operator.
+  maxDistanceInRadians: Float
+  # This is the maxDistanceInMiles operator to specify a constraint to select the
+  # objects where the values of a geo point field is at a max distance (in miles)
+  # from the geo point specified in the $nearSphere operator.
+  maxDistanceInMiles: Float
+  # This is the maxDistanceInKilometers operator to specify a constraint to select
+  # the objects where the values of a geo point field is at a max distance (in
+  # kilometers) from the geo point specified in the $nearSphere operator.
+  maxDistanceInKilometers: Float
+  # This is the within operator to specify a constraint to select the objects
+  # where the values of a geo point field is within a specified box.
+  within: WithinInput
+  # This is the geoWithin operator to specify a constraint to select the objects
+  # where the values of a geo point field is within a specified polygon or sphere.
+  geoWithin: GeoWithinInput
+}
+
+# The GeoWithinInput type is used to specify a geoWithin operation on a constraint.
+input GeoWithinInput {
+  # This is the polygon to be specified.
+  polygon: [GeoPointInput!]
+  # This is the sphere to be specified.
+  centerSphere: CenterSphereInput
+}
+
+# The Hero object type is used in operations that involve outputting objects of Hero class.
+type Hero implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+# A connection to a list of items.
+type HeroConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [HeroEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type HeroEdge {
+  # The item at the end of the edge
+  node: Hero
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The HeroOrder input type is used when sorting objects of the Hero class.
+enum HeroOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  height_ASC
+  height_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Hero class.
+input HeroPointerInput {
+  # Link an existing object from Hero class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Hero class.
+  createAndLink: CreateHeroFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Hero class into a relation field.
+input HeroRelationInput {
+  # Add existing objects from the Hero class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Hero class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Hero class into the relation.
+  createAndAdd: [CreateHeroFieldsInput!]
+}
+
+# The HeroRelationWhereInput input type is used in operations that involve filtering objects of Hero class.
+input HeroRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: HeroWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: HeroWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The HeroWhereInput input type is used in operations that involve filtering objects of Hero class.
+input HeroWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object height.
+  height: NumberWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [HeroWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [HeroWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [HeroWhereInput!]
+}
+
+# The IdWhereInput input type is used in operations that involve filtering objects by an id.
+input IdWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: ID
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: ID
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: ID
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: ID
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: ID
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: ID
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [ID]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [ID]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# An entry from an object, i.e., a pair of key and value.
+input KeyValueInput {
+  # The key used to retrieve the value of this entry.
+  key: String!
+  # The value of the entry. Could be any type of scalar data.
+  value: Any!
+}
+
+input LogInInput {
+  # This is the username used to log in the user.
+  username: String!
+  # This is the password used to log in the user.
+  password: String!
+  clientMutationId: String
+}
+
+type LogInPayload {
+  # This is the existing user that was logged in and returned as a viewer.
+  viewer: Viewer!
+  clientMutationId: String
+}
+
+input LogOutInput {
+  clientMutationId: String
+}
+
+type LogOutPayload {
+  # This is the existing user that was logged out and returned as a viewer.
+  viewer: Viewer!
+  clientMutationId: String
+}
+
+# Mutation is the top level type for mutations.
+type Mutation {
+  # The createRole mutation can be used to create a new object of the Role class.
+  createRole(input: CreateRoleInput!): CreateRolePayload
+  # The updateRole mutation can be used to update an object of the Role class.
+  updateRole(input: UpdateRoleInput!): UpdateRolePayload
+  # The deleteRole mutation can be used to delete an object of the Role class.
+  deleteRole(input: DeleteRoleInput!): DeleteRolePayload
+  # The createUser mutation can be used to create a new object of the User class.
+  createUser(input: CreateUserInput!): CreateUserPayload
+  # The updateUser mutation can be used to update an object of the User class.
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  # The deleteUser mutation can be used to delete an object of the User class.
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  # The createAnimal mutation can be used to create a new object of the Animal class.
+  createAnimal(input: CreateAnimalInput!): CreateAnimalPayload
+  # The updateAnimal mutation can be used to update an object of the Animal class.
+  updateAnimal(input: UpdateAnimalInput!): UpdateAnimalPayload
+  # The deleteAnimal mutation can be used to delete an object of the Animal class.
+  deleteAnimal(input: DeleteAnimalInput!): DeleteAnimalPayload
+  # The createB4aVehicle mutation can be used to create a new object of the B4aVehicle class.
+  createB4aVehicle(input: CreateB4aVehicleInput!): CreateB4aVehiclePayload
+  # The updateB4aVehicle mutation can be used to update an object of the B4aVehicle class.
+  updateB4aVehicle(input: UpdateB4aVehicleInput!): UpdateB4aVehiclePayload
+  # The deleteB4aVehicle mutation can be used to delete an object of the B4aVehicle class.
+  deleteB4aVehicle(input: DeleteB4aVehicleInput!): DeleteB4aVehiclePayload
+  # The createCountries mutation can be used to create a new object of the Countries class.
+  createCountries(input: CreateCountriesInput!): CreateCountriesPayload
+  # The updateCountries mutation can be used to update an object of the Countries class.
+  updateCountries(input: UpdateCountriesInput!): UpdateCountriesPayload
+  # The deleteCountries mutation can be used to delete an object of the Countries class.
+  deleteCountries(input: DeleteCountriesInput!): DeleteCountriesPayload
+  # The createFeedback mutation can be used to create a new object of the Feedback class.
+  createFeedback(input: CreateFeedbackInput!): CreateFeedbackPayload
+  # The updateFeedback mutation can be used to update an object of the Feedback class.
+  updateFeedback(input: UpdateFeedbackInput!): UpdateFeedbackPayload
+  # The deleteFeedback mutation can be used to delete an object of the Feedback class.
+  deleteFeedback(input: DeleteFeedbackInput!): DeleteFeedbackPayload
+  # The createHero mutation can be used to create a new object of the Hero class.
+  createHero(input: CreateHeroInput!): CreateHeroPayload
+  # The updateHero mutation can be used to update an object of the Hero class.
+  updateHero(input: UpdateHeroInput!): UpdateHeroPayload
+  # The deleteHero mutation can be used to delete an object of the Hero class.
+  deleteHero(input: DeleteHeroInput!): DeleteHeroPayload
+  # The createPerson mutation can be used to create a new object of the Person class.
+  createPerson(input: CreatePersonInput!): CreatePersonPayload
+  # The updatePerson mutation can be used to update an object of the Person class.
+  updatePerson(input: UpdatePersonInput!): UpdatePersonPayload
+  # The deletePerson mutation can be used to delete an object of the Person class.
+  deletePerson(input: DeletePersonInput!): DeletePersonPayload
+  # The createFile mutation can be used to create and upload a new file.
+  createFile(input: CreateFileInput!): CreateFilePayload
+  # The signUp mutation can be used to create and sign up a new user.
+  signUp(input: SignUpInput!): SignUpPayload
+  # The logIn mutation can be used to log in an existing user.
+  logIn(input: LogInInput!): LogInPayload
+  # The logOut mutation can be used to log out an existing user.
+  logOut(input: LogOutInput!): LogOutPayload
+  # The resetPassword mutation can be used to reset the password of an existing user.
+  resetPassword(input: ResetPasswordInput!): ResetPasswordPayload
+  # The sendVerificationEmail mutation can be used to send the verification email again.
+  sendVerificationEmail(
+    input: SendVerificationEmailInput!
+  ): SendVerificationEmailPayload
+  # The createClass mutation can be used to create the schema for a new object class.
+  createClass(input: CreateClassInput!): CreateClassPayload
+  # The updateClass mutation can be used to update the schema for an existing object class.
+  updateClass(input: UpdateClassInput!): UpdateClassPayload
+  # The deleteClass mutation can be used to delete an existing object class.
+  deleteClass(input: DeleteClassInput!): DeleteClassPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# The NumberWhereInput input type is used in operations that involve filtering objects by a field of type Number.
+input NumberWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: Float
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: Float
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: Float
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: Float
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: Float
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: Float
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [Float]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [Float]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The Object scalar type is used in operations and types that involve objects.
+scalar Object
+
+# The ObjectWhereInput input type is used in operations that involve filtering result by a field of type Object.
+input ObjectWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: KeyValueInput
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: KeyValueInput
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [KeyValueInput]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [KeyValueInput]
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: KeyValueInput
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: KeyValueInput
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: KeyValueInput
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: KeyValueInput
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# The ParseObject interface type is used as a base type for the auto generated object types.
+interface ParseObject {
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+}
+
+# The Person object type is used in operations that involve outputting objects of Person class.
+type Person implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+# A connection to a list of items.
+type PersonConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [PersonEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type PersonEdge {
+  # The item at the end of the edge
+  node: Person
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The PersonOrder input type is used when sorting objects of the Person class.
+enum PersonOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  salary_ASC
+  salary_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Person class.
+input PersonPointerInput {
+  # Link an existing object from Person class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Person class.
+  createAndLink: CreatePersonFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Person class into a relation field.
+input PersonRelationInput {
+  # Add existing objects from the Person class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Person class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Person class into the relation.
+  createAndAdd: [CreatePersonFieldsInput!]
+}
+
+# The PersonRelationWhereInput input type is used in operations that involve filtering objects of Person class.
+input PersonRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: PersonWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: PersonWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The PersonWhereInput input type is used in operations that involve filtering objects of Person class.
+input PersonWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object salary.
+  salary: NumberWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [PersonWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [PersonWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [PersonWhereInput!]
+}
+
+# The PointerFieldInput is used to specify a field of type pointer for an object class schema.
+input PointerFieldInput {
+  # This is the field name.
+  name: String!
+  # This is the name of the target class for the field.
+  targetClassName: String!
+}
+
+# The PolygonWhereInput input type is used in operations that involve filtering objects by a field of type Polygon.
+input PolygonWhereInput {
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the geoIntersects operator to specify a constraint to select the
+  # objects where the values of a polygon field intersect a specified point.
+  geoIntersects: GeoIntersectsInput
+}
+
+# Allow to manage public rights.
+type PublicACL {
+  # Allow anyone to read the current object.
+  read: Boolean
+  # Allow anyone to write on the current object.
+  write: Boolean
+}
+
+# Allow to manage public rights.
+input PublicACLInput {
+  # Allow anyone to read the current object.
+  read: Boolean!
+  # Allow anyone to write on the current object.
+  write: Boolean!
+}
+
+# Query is the top level type for queries.
+type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  # The role query can be used to get an object of the Role class by its id.
+  role(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Role!
+  # The roles query can be used to find objects of the Role class.
+  roles(
+    # These are the conditions that the objects need to match in order to be found.
+    where: RoleWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [RoleOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): RoleConnection!
+  # The user query can be used to get an object of the User class by its id.
+  user(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): User!
+  # The users query can be used to find objects of the User class.
+  users(
+    # These are the conditions that the objects need to match in order to be found.
+    where: UserWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [UserOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): UserConnection!
+  # The animal query can be used to get an object of the Animal class by its id.
+  animal(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Animal!
+  # The animals query can be used to find objects of the Animal class.
+  animals(
+    # These are the conditions that the objects need to match in order to be found.
+    where: AnimalWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [AnimalOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): AnimalConnection!
+  # The b4aVehicle query can be used to get an object of the B4aVehicle class by its id.
+  b4aVehicle(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): B4aVehicle!
+  # The b4aVehicles query can be used to find objects of the B4aVehicle class.
+  b4aVehicles(
+    # These are the conditions that the objects need to match in order to be found.
+    where: B4aVehicleWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [B4aVehicleOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): B4aVehicleConnection!
+  # The countries query can be used to get an object of the Countries class by its id.
+  countries(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Countries!
+  # The feedback query can be used to get an object of the Feedback class by its id.
+  feedback(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Feedback!
+  # The feedbacks query can be used to find objects of the Feedback class.
+  feedbacks(
+    # These are the conditions that the objects need to match in order to be found.
+    where: FeedbackWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [FeedbackOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): FeedbackConnection!
+  # The hero query can be used to get an object of the Hero class by its id.
+  hero(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Hero!
+  # The heroes query can be used to find objects of the Hero class.
+  heroes(
+    # These are the conditions that the objects need to match in order to be found.
+    where: HeroWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [HeroOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): HeroConnection!
+  # The person query can be used to get an object of the Person class by its id.
+  person(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Person!
+  # The people query can be used to find objects of the Person class.
+  people(
+    # These are the conditions that the objects need to match in order to be found.
+    where: PersonWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [PersonOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): PersonConnection!
+  # The health query can be used to check if the server is up and running.
+  health: Boolean!
+  # The viewer query can be used to return the current user data.
+  viewer: Viewer!
+  # The class query can be used to retrieve an existing object class.
+  class(
+    # This is the name of the object class.
+    name: String!
+  ): Class!
+  # The classes query can be used to retrieve the existing object classes.
+  classes: [Class!]!
+}
+
+# The ReadOptionsInputt type is used in queries in order to set the read preferences.
+input ReadOptionsInput {
+  # The read preference for the main query to be executed.
+  readPreference: ReadPreference
+  # The read preference for the queries to be executed to include fields.
+  includeReadPreference: ReadPreference
+  # The read preference for the subqueries that may be required.
+  subqueryReadPreference: ReadPreference
+}
+
+# The ReadPreference enum type is used in queries in order to select in which database replica the operation must run.
+enum ReadPreference {
+  PRIMARY
+  PRIMARY_PREFERRED
+  SECONDARY
+  SECONDARY_PREFERRED
+  NEAREST
+}
+
+# The RelationFieldInput is used to specify a field of type relation for an object class schema.
+input RelationFieldInput {
+  # This is the field name.
+  name: String!
+  # This is the name of the target class for the field.
+  targetClassName: String!
+}
+
+input ResetPasswordInput {
+  email: String!
+  clientMutationId: String
+}
+
+type ResetPasswordPayload {
+  # It's always true.
+  ok: Boolean!
+  clientMutationId: String
+}
+
+# The Role object type is used in operations that involve outputting objects of Role class.
+type Role implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object users.
+  users(
+    # These are the conditions that the objects need to match in order to be found.
+    where: UserWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [UserOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): UserConnection!
+  # This is the object roles.
+  roles(
+    # These are the conditions that the objects need to match in order to be found.
+    where: RoleWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [RoleOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): RoleConnection!
+}
+
+# Allow to manage roles in ACL. If read and write are null the role have read and write rights.
+type RoleACL {
+  # Name of the targetted Role.
+  roleName: ID!
+  # Allow users who are members of the role to read the current object.
+  read: Boolean!
+  # Allow users who are members of the role to write on the current object.
+  write: Boolean!
+}
+
+# Allow to manage roles in ACL.
+input RoleACLInput {
+  # Name of the targetted Role.
+  roleName: String!
+  # Allow users who are members of the role to read the current object.
+  read: Boolean!
+  # Allow users who are members of the role to write on the current object.
+  write: Boolean!
+}
+
+# A connection to a list of items.
+type RoleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [RoleEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type RoleEdge {
+  # The item at the end of the edge
+  node: Role
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The RoleOrder input type is used when sorting objects of the Role class.
+enum RoleOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  users_ASC
+  users_DESC
+  roles_ASC
+  roles_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Role class.
+input RolePointerInput {
+  # Link an existing object from Role class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Role class.
+  createAndLink: CreateRoleFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Role class into a relation field.
+input RoleRelationInput {
+  # Add existing objects from the Role class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Role class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Role class into the relation.
+  createAndAdd: [CreateRoleFieldsInput!]
+}
+
+# The RoleRelationWhereInput input type is used in operations that involve filtering objects of Role class.
+input RoleRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: RoleWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: RoleWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The RoleWhereInput input type is used in operations that involve filtering objects of Role class.
+input RoleWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object users.
+  users: UserRelationWhereInput
+  # This is the object roles.
+  roles: RoleRelationWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [RoleWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [RoleWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [RoleWhereInput!]
+}
+
+# The SchemaACLField is used to return information of an ACL field.
+type SchemaACLField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaArrayField is used to return information of an Array field.
+type SchemaArrayField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaArrayFieldInput is used to specify a field of type array for an object class schema.
+input SchemaArrayFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaBooleanField is used to return information of a Boolean field.
+type SchemaBooleanField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaBooleanFieldInput is used to specify a field of type boolean for an object class schema.
+input SchemaBooleanFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaBytesField is used to return information of a Bytes field.
+type SchemaBytesField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaBytesFieldInput is used to specify a field of type bytes for an object class schema.
+input SchemaBytesFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaDateField is used to return information of a Date field.
+type SchemaDateField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaDateFieldInput is used to specify a field of type date for an object class schema.
+input SchemaDateFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaField interface type is used as a base type for the different supported fields of an object class schema.
+interface SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaFieldInput is used to specify a field of an object class schema.
+input SchemaFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The CreateClassSchemaInput type is used to specify the schema for a new object class to be created.
+input SchemaFieldsInput {
+  # These are the String fields to be added to the class schema.
+  addStrings: [SchemaStringFieldInput!]
+  # These are the Number fields to be added to the class schema.
+  addNumbers: [SchemaNumberFieldInput!]
+  # These are the Boolean fields to be added to the class schema.
+  addBooleans: [SchemaBooleanFieldInput!]
+  # These are the Array fields to be added to the class schema.
+  addArrays: [SchemaArrayFieldInput!]
+  # These are the Object fields to be added to the class schema.
+  addObjects: [SchemaObjectFieldInput!]
+  # These are the Date fields to be added to the class schema.
+  addDates: [SchemaDateFieldInput!]
+  # These are the File fields to be added to the class schema.
+  addFiles: [SchemaFileFieldInput!]
+  # This is the Geo Point field to be added to the class schema. Currently it is supported only one GeoPoint field per Class.
+  addGeoPoint: SchemaGeoPointFieldInput
+  # These are the Polygon fields to be added to the class schema.
+  addPolygons: [SchemaPolygonFieldInput!]
+  # These are the Bytes fields to be added to the class schema.
+  addBytes: [SchemaBytesFieldInput!]
+  # These are the Pointer fields to be added to the class schema.
+  addPointers: [PointerFieldInput!]
+  # These are the Relation fields to be added to the class schema.
+  addRelations: [RelationFieldInput!]
+  # These are the fields to be removed from the class schema.
+  remove: [SchemaFieldInput!]
+}
+
+# The SchemaFileField is used to return information of a File field.
+type SchemaFileField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaFileFieldInput is used to specify a field of type file for an object class schema.
+input SchemaFileFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaGeoPointField is used to return information of a Geo Point field.
+type SchemaGeoPointField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaGeoPointFieldInput is used to specify a field of type geo point for an object class schema.
+input SchemaGeoPointFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaNumberField is used to return information of a Number field.
+type SchemaNumberField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaNumberFieldInput is used to specify a field of type number for an object class schema.
+input SchemaNumberFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaObjectField is used to return information of an Object field.
+type SchemaObjectField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaObjectFieldInput is used to specify a field of type object for an object class schema.
+input SchemaObjectFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaPointerField is used to return information of a Pointer field.
+type SchemaPointerField implements SchemaField {
+  # This is the field name.
+  name: String!
+  # This is the name of the target class for the field.
+  targetClassName: String!
+}
+
+# The SchemaPolygonField is used to return information of a Polygon field.
+type SchemaPolygonField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaPolygonFieldInput is used to specify a field of type polygon for an object class schema.
+input SchemaPolygonFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaRelationField is used to return information of a Relation field.
+type SchemaRelationField implements SchemaField {
+  # This is the field name.
+  name: String!
+  # This is the name of the target class for the field.
+  targetClassName: String!
+}
+
+# The SchemaStringField is used to return information of a String field.
+type SchemaStringField implements SchemaField {
+  # This is the field name.
+  name: String!
+}
+
+# The SchemaStringFieldInput is used to specify a field of type string for an object class schema.
+input SchemaStringFieldInput {
+  # This is the field name.
+  name: String!
+}
+
+# The SearchInput type is used to specifiy a search operation on a full text search.
+input SearchInput {
+  # This is the term to be searched.
+  term: String!
+  # This is the language to tetermine the list of stop words and the rules for tokenizer.
+  language: String
+  # This is the flag to enable or disable case sensitive search.
+  caseSensitive: Boolean
+  # This is the flag to enable or disable diacritic sensitive search.
+  diacriticSensitive: Boolean
+}
+
+# The SelectInput type is used to specify an inQueryKey or a notInQueryKey operation on a constraint.
+input SelectInput {
+  # This is the subquery to be executed.
+  query: SubqueryInput!
+  # This is the key in the result of the subquery that must match (not match) the field.
+  key: String!
+}
+
+input SendVerificationEmailInput {
+  email: String!
+  clientMutationId: String
+}
+
+type SendVerificationEmailPayload {
+  # It's always true.
+  ok: Boolean!
+  clientMutationId: String
+}
+
+input SignUpInput {
+  userFields: CreateUserFieldsInput
+  clientMutationId: String
+}
+
+type SignUpPayload {
+  # This is the new user that was created, signed up and returned as a viewer.
+  viewer: Viewer!
+  clientMutationId: String
+}
+
+# The StringWhereInput input type is used in operations that involve filtering objects by a field of type String.
+input StringWhereInput {
+  # This is the equalTo operator to specify a constraint to select the objects
+  # where the value of a field equals to a specified value.
+  equalTo: String
+  # This is the notEqualTo operator to specify a constraint to select the objects
+  # where the value of a field do not equal to a specified value.
+  notEqualTo: String
+  # This is the lessThan operator to specify a constraint to select the objects
+  # where the value of a field is less than a specified value.
+  lessThan: String
+  # This is the lessThanOrEqualTo operator to specify a constraint to select the
+  # objects where the value of a field is less than or equal to a specified value.
+  lessThanOrEqualTo: String
+  # This is the greaterThan operator to specify a constraint to select the objects
+  # where the value of a field is greater than a specified value.
+  greaterThan: String
+  # This is the greaterThanOrEqualTo operator to specify a constraint to select
+  # the objects where the value of a field is greater than or equal to a specified value.
+  greaterThanOrEqualTo: String
+  # This is the in operator to specify a constraint to select the objects where
+  # the value of a field equals any value in the specified array.
+  in: [String]
+  # This is the notIn operator to specify a constraint to select the objects where
+  # the value of a field do not equal any value in the specified array.
+  notIn: [String]
+  # This is the exists operator to specify a constraint to select the objects where a field exists (or do not exist).
+  exists: Boolean
+  # This is the matchesRegex operator to specify a constraint to select the
+  # objects where the value of a field matches a specified regular expression.
+  matchesRegex: String
+  # This is the options operator to specify optional flags (such as "i" and "m")
+  # to be added to a matchesRegex operation in the same set of constraints.
+  options: String
+  # This is the $text operator to specify a full text search constraint.
+  text: TextInput
+  # This is the inQueryKey operator to specify a constraint to select the objects
+  # where a field equals to a key in the result of a different query.
+  inQueryKey: SelectInput
+  # This is the notInQueryKey operator to specify a constraint to select the
+  # objects where a field do not equal to a key in the result of a different query.
+  notInQueryKey: SelectInput
+}
+
+# The SubqueryInput type is used to specify a sub query to another class.
+input SubqueryInput {
+  # This is the class name of the object.
+  className: String!
+  # These are the conditions that the objects need to match in order to be found
+  where: Object!
+}
+
+# The TextInput type is used to specify a text operation on a constraint.
+input TextInput {
+  # This is the search to be executed.
+  search: SearchInput!
+}
+
+# The UpdateAnimalFieldsInput input type is used in operations that involve creation of objects in the Animal class.
+input UpdateAnimalFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+}
+
+input UpdateAnimalInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateAnimalFieldsInput
+  clientMutationId: String
+}
+
+type UpdateAnimalPayload {
+  # This is the updated object.
+  animal: Animal!
+  clientMutationId: String
+}
+
+# The UpdateB4aVehicleFieldsInput input type is used in operations that involve creation of objects in the B4aVehicle class.
+input UpdateB4aVehicleFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object price.
+  price: Float
+  # This is the object color.
+  color: String
+}
+
+input UpdateB4aVehicleInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateB4aVehicleFieldsInput
+  clientMutationId: String
+}
+
+type UpdateB4aVehiclePayload {
+  # This is the updated object.
+  b4aVehicle: B4aVehicle!
+  clientMutationId: String
+}
+
+input UpdateClassInput {
+  # This is the name of the object class.
+  name: String!
+  # These are the schema's fields of the object class.
+  schemaFields: SchemaFieldsInput
+  clientMutationId: String
+}
+
+type UpdateClassPayload {
+  # This is the updated class.
+  class: Class!
+  clientMutationId: String
+}
+
+# The UpdateCountriesFieldsInput input type is used in operations that involve creation of objects in the Countries class.
+input UpdateCountriesFieldsInput {
+  ACL: ACLInput
+  # This is the object Name.
+  Name: String
+}
+
+input UpdateCountriesInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateCountriesFieldsInput
+  clientMutationId: String
+}
+
+type UpdateCountriesPayload {
+  # This is the updated object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+# The UpdateFeedbackFieldsInput input type is used in operations that involve creation of objects in the Feedback class.
+input UpdateFeedbackFieldsInput {
+  ACL: ACLInput
+  # This is the object author.
+  author: String
+}
+
+input UpdateFeedbackInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateFeedbackFieldsInput
+  clientMutationId: String
+}
+
+type UpdateFeedbackPayload {
+  # This is the updated object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
+# The UpdateHeroFieldsInput input type is used in operations that involve creation of objects in the Hero class.
+input UpdateHeroFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+input UpdateHeroInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateHeroFieldsInput
+  clientMutationId: String
+}
+
+type UpdateHeroPayload {
+  # This is the updated object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+# The UpdatePersonFieldsInput input type is used in operations that involve creation of objects in the Person class.
+input UpdatePersonFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+input UpdatePersonInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdatePersonFieldsInput
+  clientMutationId: String
+}
+
+type UpdatePersonPayload {
+  # This is the updated object.
+  person: Person!
+  clientMutationId: String
+}
+
+# The UpdateRoleFieldsInput input type is used in operations that involve creation of objects in the Role class.
+input UpdateRoleFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object users.
+  users: UserRelationInput
+  # This is the object roles.
+  roles: RoleRelationInput
+}
+
+input UpdateRoleInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateRoleFieldsInput
+  clientMutationId: String
+}
+
+type UpdateRolePayload {
+  # This is the updated object.
+  role: Role!
+  clientMutationId: String
+}
+
+# The UpdateUserFieldsInput input type is used in operations that involve creation of objects in the User class.
+input UpdateUserFieldsInput {
+  ACL: ACLInput
+  # This is the object username.
+  username: String
+  # This is the object password.
+  password: String
+  # This is the object email.
+  email: String
+  # This is the object emailVerified.
+  emailVerified: Boolean
+  # This is the object authData.
+  authData: Object
+}
+
+input UpdateUserInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateUserFieldsInput
+  clientMutationId: String
+}
+
+type UpdateUserPayload {
+  # This is the updated object.
+  user: User!
+  clientMutationId: String
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload
+
+# The User object type is used in operations that involve outputting objects of User class.
+type User implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object username.
+  username: String
+  # This is the object email.
+  email: String
+  # This is the object emailVerified.
+  emailVerified: Boolean
+  # This is the object authData.
+  authData: Object
+}
+
+# Allow to manage users in ACL. If read and write are null the users have read and write rights.
+type UserACL {
+  # ID of the targetted User.
+  userId: ID!
+  # Allow the user to read the current object.
+  read: Boolean!
+  # Allow the user to write on the current object.
+  write: Boolean!
+}
+
+# Allow to manage users in ACL.
+input UserACLInput {
+  # ID of the targetted User.
+  userId: ID!
+  # Allow the user to read the current object.
+  read: Boolean!
+  # Allow the user to write on the current object.
+  write: Boolean!
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [UserEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge
+  node: User
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The UserOrder input type is used when sorting objects of the User class.
+enum UserOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  email_ASC
+  email_DESC
+  emailVerified_ASC
+  emailVerified_DESC
+  authData_ASC
+  authData_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the User class.
+input UserPointerInput {
+  # Link an existing object from User class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from User class.
+  createAndLink: CreateUserFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the User class into a relation field.
+input UserRelationInput {
+  # Add existing objects from the User class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the User class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the User class into the relation.
+  createAndAdd: [CreateUserFieldsInput!]
+}
+
+# The UserRelationWhereInput input type is used in operations that involve filtering objects of User class.
+input UserRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: UserWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: UserWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The UserWhereInput input type is used in operations that involve filtering objects of User class.
+input UserWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object username.
+  username: StringWhereInput
+  # This is the object password.
+  password: StringWhereInput
+  # This is the object email.
+  email: StringWhereInput
+  # This is the object emailVerified.
+  emailVerified: BooleanWhereInput
+  # This is the object authData.
+  authData: ObjectWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [UserWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [UserWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [UserWhereInput!]
+}
+
+# The Viewer object type is used in operations that involve outputting the current user data.
+type Viewer {
+  # The current user session token.
+  sessionToken: String!
+  # This is the current user.
+  user: User!
+}
+
+# The WithinInput type is used to specify a within operation on a constraint.
+input WithinInput {
+  # This is the box to be specified.
+  box: BoxInput!
+}
+
