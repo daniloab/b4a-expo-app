@@ -1,6 +1,5 @@
 import React from "react";
 import { QueryRenderer } from "react-relay";
-import graphql from 'babel-plugin-relay/macro';
 import Environment from "./relay/Environment";
 import PersonCard from "./PersonCard";
 import { View, Text } from "react-native";
